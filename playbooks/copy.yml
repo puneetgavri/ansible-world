@@ -1,0 +1,9 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Copy ansible inventory file to all hostmachines
+      copy: 
+        src: /etc/ansible/ansible.cfg 
+        dest: /tmp/  
+        owner: root 
+        group: root
