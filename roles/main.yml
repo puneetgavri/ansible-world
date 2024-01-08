@@ -1,0 +1,10 @@
+---
+ - name: This playbook will invoke the web role
+   hosts: all
+   become: yes
+   gather_facts: True
+   roles:
+     - web
+   vars:
+     apache_name: john
+     apache_port: 80

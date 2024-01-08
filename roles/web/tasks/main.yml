@@ -1,0 +1,12 @@
+---
+# tasks file for apache
+# The import tasks will load the tasks in the order define
+# This will execute 1 yaml file after another.
+
+ - include_tasks: pre-requisites.yml
+
+ - include_tasks: install.yml
+
+ - include_tasks: configure.yml
+ - include_tasks: handlers/main.yml
+   # - import_tasks: service.yml

@@ -1,0 +1,8 @@
+---
+# defaults file for apache
+
+apache_port: 80
+apache_user: apache2
+apache_group: apache2
+apache_name: dummy
+ansible_document_root: /var/www/html

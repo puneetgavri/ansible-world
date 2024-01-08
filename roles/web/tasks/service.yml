@@ -1,0 +1,7 @@
+---
+# To start apache web servers
+
+ - name: To start apache web server
+   service:
+     name: "{{ apache_package }}"
+     state: started
