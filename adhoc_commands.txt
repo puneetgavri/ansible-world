@@ -1,0 +1,12 @@
+ansible --inventory /etc/ansible/hosts myhosts -m ping
+ansible all -m ping
+ansible all --list-hosts
+ansible all -m shell -a "ls -altr" //list all files on hosts
+ansible myhosts[1] -m shell -a "touch newfile" // create file in server at 1st index
+ansible all -m shell -a "apt install git" //permission denied since no sudo used
+ansible all -m shell -a "sudo apt install git" //will work since we have used sudo
+ansible all -m shell -a "apt install git" -b //will work since we have used -b ie become sudo
+ansible all -m copy -a "src=hellofile dest=/home/sysops"
+ansible all -m apt -a "name=apache2 state=present" -b
+ansible all -m service -a "name=apache2 state=stopped" -b
+ansible all -m shell -a "free -m"
