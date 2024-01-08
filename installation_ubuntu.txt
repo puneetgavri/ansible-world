@@ -1,0 +1,128 @@
+
+sudo hostnamectl set-hostname <hostname>
+Install ansible on contoller:
+STEP 0-
+sudo su
+sudo apt update
+sudo apt install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+ansible --version
+
+On all servers:
+
+STEP1- Login as root user. Create a ansible user, set the password and add it to the sudoers file:
+sudo su
+useradd -m ansible
+passwd ansible
+echo "ansible ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+
+STEP2- Switch to ansible user
+generate key pair using below command. This would generate a private and a public key inside .ssh directory:
+ssh-keygen
+
+
+STEP3-
+On hosts:
+cd .ssh
+vi authorized_keys
+copy the public key id_rsa.pub content from the controller and copy it inside authorized_keys
+
+STEP4- Form controller server verify that ssh connection between controller and host is getting established:
+ssh <private IP of host>
+
+STEP5- update inventory file , create a host group and add host IPs to the group
+vi /etc/ansible/hosts
+[myhosts]
+172.31.38.127
+172.31.45.115
+
+
+Ansible Adhoc commands:
+ansible --inventory /etc/ansible/hosts myhosts -m ping
+ansible all -m ping
+ansible all --list-hosts
+ansible all -m shell -a "ls -altr" //list all files on hosts
+ansible myhosts[1] -m shell -a "touch newfile" // create file in server at 1st index
+ansible all -m shell -a "apt install git" //permission denied since no sudo used
+ansible all -m shell -a "sudo apt install git" //will work since we have used sudo
+ansible all -m shell -a "apt install git" -b //will work since we have used -b ie become sudo
+ansible all -m copy -a "src=hellofile dest=/home/sysops"
+ansible all -m apt -a "name=apache2 state=present" -b
+ansible all -m service -a "name=apache2 state=stopped" -b
+ansible all -m shell -a "free -m"
+
+
+
+
+YAML (YAML Ain't Markup Language) 
+
+---
+#list
+Fruit:
+ - Oranges
+ - Pears
+ - Apples
+ 
+#Dictionaries (Mappings):
+person:
+  name: John Doe
+  age: 30
+  occupation: Developer
+
+#dictionary+list
+Employees:
+- name: John Doe
+  department: Engineering
+  country: USA
+- name: Kate Kateson
+  department: IT support
+  country: United Kingdom
+ 
+...
+
+
+Playbook:
+
+---
+- name: play1
+  become: yes
+  hosts: dev
+  tasks:
+         - name: execute command Date
+           command: date
+         - name: copy file
+           copy:
+             src: /home/ansible/dev.txt
+             dest: /home/ansible
+
+- name: play2
+  become: yes
+  hosts: prod
+  tasks:
+         - name: shell task
+           shell: echo "install nginx"
+         - name: install nginx
+           apt: name=nginx state=latest
+
+
+----------------------------------------------------
+	   
+  
+
+- name: install apache
+  hosts: all
+  become: yes
+  tasks:
+    - name: run apt-get update
+      apt:
+       update_cache: yes
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+    - name: start service
+      systemd:
+        name: apache2
+        state: restarted
