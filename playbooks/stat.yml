@@ -5,7 +5,8 @@
     stat:
       path: /tmp/file.txt
     register: stat_result
-
+  - debug:
+      msg: "{{stat_result}}"
   - name: Create the file, if it doesnt exist already
     file:
       path: /tmp/file.txt
