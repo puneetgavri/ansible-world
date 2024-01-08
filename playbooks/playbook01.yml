@@ -15,6 +15,6 @@
   hosts: prod
   tasks:
          - name: shell task
-           shell: echo "install nginx"
-         - name: install nginx
-           apt: name=nginx state=latest
+           shell: echo "install mysql"
+         - name: install mysql server
+           apt: name=mysql-server state=present
