@@ -1,0 +1,25 @@
+YAML (YAML Ain't Markup Language) 
+
+---
+#list
+Fruit:
+ - Oranges
+ - Pears
+ - Apples
+ 
+#Dictionaries (Mappings):
+person:
+  name: John Doe
+  age: 30
+  occupation: Developer
+
+#dictionary+list
+Employees:
+- name: John Doe
+  department: Engineering
+  country: USA
+- name: Kate Kateson
+  department: IT support
+  country: United Kingdom
+ 
+...
