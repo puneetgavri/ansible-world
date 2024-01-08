@@ -1,0 +1,20 @@
+---
+- name: play1
+  become: yes
+  hosts: dev
+  tasks:
+         - name: execute command Date
+           command: date
+         - name: copy file
+           copy:
+             src: /home/ansible/dev.txt
+             dest: /home/ansible
+
+- name: play2
+  become: yes
+  hosts: prod
+  tasks:
+         - name: shell task
+           shell: echo "install nginx"
+         - name: install nginx
+           apt: name=nginx state=latest
