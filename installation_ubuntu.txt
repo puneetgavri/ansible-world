@@ -20,7 +20,7 @@ echo "ansible ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
 
 STEP2- Switch to ansible user
 generate key pair using below command. This would generate a private and a public key inside .ssh directory:
-ssh-keygen
+ssh-keygen -t rsa
 
 
 STEP3-
