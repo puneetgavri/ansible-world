@@ -8,5 +8,5 @@
  - include_tasks: install.yml
 
  - include_tasks: configure.yml
- - include_tasks: handlers/main.yml
+ #- include_tasks: handlers/main.yml
    # - import_tasks: service.yml
