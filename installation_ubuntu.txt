@@ -52,6 +52,7 @@ ansible all -m copy -a "src=hellofile dest=/home/sysops"
 ansible all -m apt -a "name=apache2 state=present" -b
 ansible all -m service -a "name=apache2 state=stopped" -b
 ansible all -m shell -a "free -m"
+ansible all -m setup  // check everything about the hosts
 
 
 
