@@ -1,13 +1,32 @@
 ---
- - hosts: all
-   become: yes
-   tasks:
-     - name: install a webserver 
-       yum:
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: Install Apache on RedHat
+      yum:
         name: httpd
-        state: latest 
-       when: ansible_distribution == 'RedHat'
-     - name: start the service
-       service:
-         name: httpd
-         state: started
+        state: latest
+      when: ansible_distribution == "RedHat"
+
+    - name: Install Apache on Ubuntu
+      apt:
+        name: apache2
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Start Apache service on RedHat
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RedHat"
+
+    - name: Start Apache service on Ubuntu
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
