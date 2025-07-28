@@ -1,0 +1,9 @@
+- name: Copy index.html to web root
+  copy:
+    src: index.html
+    dest: "{{ web_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  notify: restart nginx
+

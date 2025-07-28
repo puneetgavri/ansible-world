@@ -1,0 +1,3 @@
+deploy_user: deploy
+web_root: /var/www/html
+

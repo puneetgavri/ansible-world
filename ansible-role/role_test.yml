@@ -1,0 +1,6 @@
+- name: Setup web server
+  hosts: all
+  become: yes
+  roles:
+    - simple_role
+

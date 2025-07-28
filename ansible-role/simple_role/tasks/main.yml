@@ -1,0 +1,8 @@
+- name: Include install tasks
+  include_tasks: install.yml
+
+- name: Include user setup tasks
+  include_tasks: setup_user.yml
+
+- name: Include file copy tasks
+  include_tasks: copy_files.yml
