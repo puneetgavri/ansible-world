@@ -1,0 +1,13 @@
+---
+- name: Install a package based on variable
+  hosts: all
+  become: true
+
+  vars:
+    package_name: nginx  # Default value (can be overridden with -e)
+
+  tasks:
+    - name: Install specified package
+      apt:
+        name: "{{ package_name }}"
+        state: present
