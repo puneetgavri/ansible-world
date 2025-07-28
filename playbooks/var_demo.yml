@@ -11,3 +11,8 @@
       apt:
         name: "{{ package_name }}"
         state: present
+      register: install_result
+
+    - name: print value
+      debug:
+        var: install_result
